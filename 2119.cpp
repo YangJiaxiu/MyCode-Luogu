@@ -19,13 +19,6 @@ int main() {
     for (int i = 1; i <= m; ++i) {
         getInt(X[i]);
     }
-
-
-    for (int i = 1; i <= m; ++i) {
-        std::cout << colorTime[1][i] << " "  
-                  << colorTime[2][i] << " "
-                  << colorTime[3][i] << " "
-                  << colorTime[4][i] << " "                  
-    }
+    
     return 0;
 }
