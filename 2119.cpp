@@ -20,5 +20,6 @@ int main() {
         getInt(X[i]);
     }
     
+    
     return 0;
 }
