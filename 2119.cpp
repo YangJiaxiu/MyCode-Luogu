@@ -1,25 +1,41 @@
-#include<bits/stdc++.h>
+#include<iostream>
 
 const int MaxN = 15000 + 10;
+const int MaxM = 40000 + 10;
 
-template<typename T> 
-    inline T getInt(T &x) {
-        int f = 1; x = 0; char ch;
-        do {ch = getchar(); if (ch == '-') f = -1;} while (ch < '0' || ch > '9');
-        do {x = x * 10 + ch - '0'; ch = getchar();} while (ch >= '0' && ch <= '9');
-        x = x*f;
-    }
-
-int n, m, X[MaxN], A[MaxN], B[MaxN], C[MaxN], D[MaxN],
-    colorTime[4][MaxN];
+int N, M, num[MaxM], value[MaxM];
+int a[MaxN], b[MaxN], c[MaxN], d[MaxN];
 
 int main() {
     std::ios::sync_with_stdio(false);
-    getInt(n); getInt(m);
-    for (int i = 1; i <= m; ++i) {
-        getInt(X[i]);
+    std::cin >> N >> M;
+    for (int i = 1; i <= M; ++i) {
+        std::cin >> value[i];
+        num[value[i]]++;
     }
-    
-    
+
+    for (int t = 1; 9 * t + 1 <= N; ++t) {
+        int sum = 0;
+        int va, vb, vc, vd;
+        for (vd = 9 * t + 2; vd <= N; ++vd) {
+            vc = vd - t;
+            vb = vd - 7 * t - 1;
+            va = vd - 9 * t - 1;
+            sum += num[vb] * num[va];
+            c[vc] += sum * num[vd];
+            d[vd] += sum * num[vc];
+        }
+        sum = 0;
+        for (va = N - 9 * t - 1; va >= 1; --va) {
+            vb = va + 2 * t;
+            vc = va + t * 8 + 1;
+            vd = va + t * 9 + 1;
+            sum += num[vc] * num[vd];
+            a[va] += sum * num[vb];
+            b[vb] += sum * num[va];
+        }
+    }
+
+    for (int i = 1; i <= M; ++i) std::cout << a[value[i]] << " " << b[value[i]] << " " << c[value[i]] << " " << d[value[i]] << "\n";
     return 0;
 }
