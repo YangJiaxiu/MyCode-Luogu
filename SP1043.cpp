@@ -13,7 +13,7 @@ struct SegmentTree {
     inline void PushUp(const int &o) {
         tree[o] = tree[lson(o)] + tree[rson(o)];
     }
-    inline void Build(int o, int left, int right) {
+    inline void Build(const int &o, const int &left, const int &right) {
         lazyTag[o] = 0;
         if (left == right) {
             tree[o] = a[left];
@@ -24,11 +24,11 @@ struct SegmentTree {
         Build(rson(o), mid + 1, right);
         PushUp(o);
     }
-    inline void Mark(const int &o, int left, int right, long long k) {
+    inline void Mark(const int &o, const int &left, const int &right, const long long &k) {
         lazyTag[o] += k;
         tree[o] += k * (right - left + 1);
     }
-    inline void PushDown(const int &o, int left, int right) {
+    inline void PushDown(const int &o, const int &left, const int &right) {
         int mid = (left + right) >> 1;
         Mark(lson(o), left, mid, lazyTag[o]);
         Mark(rson(o), mid + 1, right, lazyTag[o]);
@@ -37,9 +37,9 @@ struct SegmentTree {
     inline void Updata(const int &o, 
                        const int &updataLeft, 
                        const int &updataRight, 
-                       int left, 
-                       int right, 
-                       long long k) {
+                       const int &left, 
+                       const int &right, 
+                       const long long &k) {
         if (updataLeft <= left && updataRight >= right) {
             lazyTag[o] += k;
             tree[o] += k * (right - left + 1);
@@ -51,12 +51,11 @@ struct SegmentTree {
         if (updataRight > mid) Updata(rson(o), updataLeft, updataRight, mid + 1, right, k);
         PushUp(o);
     }
-
     inline long long Query(const int &o, 
                            const int &queryLeft,
                            const int &queryRight,
-                           int left,
-                           int right) {
+                           const int &left,
+                           const int &right) {
         
         if (queryLeft <= left && queryRight >= right) return tree[o];
         int mid = (left + right) >> 1;
