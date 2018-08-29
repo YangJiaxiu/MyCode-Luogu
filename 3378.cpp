@@ -1,28 +1,22 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<queue>
 
-using std::priority_queue;
-using std::vector;
-
-priority_queue< int, vector< int >, std::greater< int > > q;
-
-inline void getInt(int &ans) {
-    int f = 1, x = 0; char ch;
-    do {ch = getchar(); if (ch == '-') f = -1;} while (ch < '0' || ch > '9');
-    do {x = x * 10 + ch - '0'; ch = getchar();} while(ch >= '0' && ch <= '9');
-    ans = f * x;
-}
+std::priority_queue< int, std::vector< int >, std::greater< int > > q;
 
 int N;
 
 int main() {
-    getInt(N);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0); std::cout.tie(0);
+    std::cin >> N; 
     int flag;
     for (int i = 1; i <= N; ++i) {
-        getInt(flag);
+        std::cin >> flag;
         switch (flag) {
             case 1: {
                 int temp;
-                getInt(temp);
+                std::cin >> temp;
                 q.push(temp);
                 break;
             }
